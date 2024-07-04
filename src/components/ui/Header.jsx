@@ -3,6 +3,8 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -17,12 +19,20 @@ function ElevationScroll(props) {
 	});
 }
 
-export default function Header(props) {
+const UseStyle = styled('div')(({ theme }) => theme.mixins.toolbar);
+
+export default function Header() {
 	return (
-		<ElevationScroll>
-			<AppBar position="fixed">
-				<Toolbar>Arc Development</Toolbar>
-			</AppBar>
-		</ElevationScroll>
+		<>
+			<ElevationScroll>
+				<AppBar position="fixed">
+					<Toolbar>
+						<Typography variant="h3">Arc Development</Typography>
+					</Toolbar>
+				</AppBar>
+			</ElevationScroll>
+
+			<UseStyle />
+		</>
 	);
 }
