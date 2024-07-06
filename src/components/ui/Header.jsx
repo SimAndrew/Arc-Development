@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -40,6 +40,18 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 	...theme.typography.tab,
 	minWidth: 10,
 	marginLeft: '25px',
+	color: '#FFFFFF',
+	'&.Mui-selected': {
+		color: theme.palette.secondary.main,
+		borderBottom: `2px solid ${theme.palette.secondary.main}`,
+	},
+	'&:hover': {
+		color: theme.palette.secondary.light,
+		opacity: 1,
+	},
+	'&:focus': {
+		color: theme.palette.secondary.main,
+	},
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -51,14 +63,26 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Header() {
+	const [value, setValue] = useState(0);
+
+	const handleChange = (event, newValue) => {
+		console.log('Tab changed to:', newValue);
+
+		setValue(newValue);
+	};
+
 	return (
 		<>
 			<ElevationScroll>
 				<AppBar position="fixed">
 					<Toolbar disableGutters>
-						<StyledLogo alt="company logo" src={logo} />
+						<StyledLogo
+							alt="company logo"
+							src={logo}
+							indicatorColor="primary"
+						/>
 
-						<StyledTabs>
+						<StyledTabs value={value} onChange={handleChange}>
 							<StyledTab label="Home" />
 							<StyledTab label="Services" />
 							<StyledTab label="The revolution" />
@@ -66,7 +90,7 @@ export default function Header() {
 							<StyledTab label="Contact Us" />
 						</StyledTabs>
 
-						<StyledButton variant="contained" color="secondary" className="">
+						<StyledButton variant="contained" color="secondary">
 							Free Estimate
 						</StyledButton>
 					</Toolbar>
