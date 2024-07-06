@@ -3,9 +3,10 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 import logo from '../../assets/logo.svg';
 
 function ElevationScroll(props) {
@@ -41,6 +42,14 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 	marginLeft: '25px',
 }));
 
+const StyledButton = styled(Button)(({ theme }) => ({
+	...theme.typography.estimate,
+	borderRadius: '50px',
+	marginLeft: '25px',
+	marginRight: '50px',
+	height: '45px',
+}));
+
 export default function Header() {
 	return (
 		<>
@@ -56,6 +65,10 @@ export default function Header() {
 							<StyledTab label="About Us" />
 							<StyledTab label="Contact Us" />
 						</StyledTabs>
+
+						<StyledButton variant="contained" color="secondary" className="">
+							Free Estimate
+						</StyledButton>
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>

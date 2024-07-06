@@ -15,7 +15,13 @@ export default createTheme({
 			textTransform: 'none',
 			fontWeight: 700,
 			fontSize: '1rem',
-			color: 'white',
+			color: '#FFFFFF',
+		},
+		estimate: {
+			fontFamily: 'Pacifico',
+			fontSize: '1rem',
+			textTransform: 'none',
+			color: '#FFFFFF',
 		},
 	},
 });
