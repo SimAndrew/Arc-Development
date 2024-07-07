@@ -8,6 +8,9 @@ export default createTheme({
 		secondary: {
 			main: '#FFBA60',
 		},
+		white: {
+			main: '#FFFFFF',
+		},
 	},
 	typography: {
 		tab: {

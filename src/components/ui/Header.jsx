@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,7 +24,7 @@ function ElevationScroll(props) {
 }
 
 const StyledLogo = styled('img')({
-	height: '6em',
+	height: '5em',
 });
 
 const StyledDiv = styled('div')(({ theme }) => ({
@@ -40,17 +41,15 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 	...theme.typography.tab,
 	minWidth: 10,
 	marginLeft: '25px',
-	color: '#FFFFFF',
+
 	'&.Mui-selected': {
-		color: theme.palette.secondary.main,
-		borderBottom: `2px solid ${theme.palette.secondary.main}`,
+		color: theme.palette.white.main,
 	},
 	'&:hover': {
-		color: theme.palette.secondary.light,
-		opacity: 1,
+		color: theme.palette.white.main,
 	},
 	'&:focus': {
-		color: theme.palette.secondary.main,
+		color: theme.palette.white.main,
 	},
 }));
 
@@ -64,10 +63,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 export default function Header() {
 	const [value, setValue] = useState(0);
-
 	const handleChange = (event, newValue) => {
-		console.log('Tab changed to:', newValue);
-
 		setValue(newValue);
 	};
 
@@ -76,27 +72,41 @@ export default function Header() {
 			<ElevationScroll>
 				<AppBar position="fixed">
 					<Toolbar disableGutters>
-						<StyledLogo
-							alt="company logo"
-							src={logo}
-							indicatorColor="primary"
-						/>
+						<Link to="/" style={{ display: 'flex' }}>
+							<StyledLogo
+								disableRipple
+								component={Link}
+								to="/"
+								alt="company logo"
+								src={logo}
+								indicatorColor="primary"
+							/>
+						</Link>
 
 						<StyledTabs value={value} onChange={handleChange}>
-							<StyledTab label="Home" />
-							<StyledTab label="Services" />
-							<StyledTab label="The revolution" />
-							<StyledTab label="About Us" />
-							<StyledTab label="Contact Us" />
+							<StyledTab label="Home" component={Link} to="/" />
+							<StyledTab label="Services" component={Link} to="/services" />
+							<StyledTab
+								label="The revolution"
+								component={Link}
+								to="/theRevolution"
+							/>
+							<StyledTab label="About Us" component={Link} to="/aboutUs" />
+							<StyledTab label="Contact Us" component={Link} to="/contactUs" />
 						</StyledTabs>
 
-						<StyledButton variant="contained" color="secondary">
+						<StyledButton
+							label="freeEstimate"
+							component={Link}
+							to="/freeEstimate"
+							variant="contained"
+							color="secondary"
+						>
 							Free Estimate
 						</StyledButton>
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
-
 			<StyledDiv />
 		</>
 	);
