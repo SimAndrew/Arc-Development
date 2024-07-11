@@ -9,6 +9,9 @@ import AboutUs from '../pages/AboutUs.jsx';
 import ContactUs from '../pages/ContactUs.jsx';
 import PageNotFound from '../pages/PageNotFound.jsx';
 import FreeEstimate from '../pages/FreeEstimate.jsx';
+import CustomSoftware from '../pages/CustomSoftware.jsx';
+import MobileApps from '../pages/MobileApps.jsx';
+import Websites from '../pages/Websites.jsx';
 
 function App() {
 	return (
@@ -17,11 +20,17 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="services" element={<Services />} />
-					<Route path="theRevolution" element={<TheRevolution />} />
-					<Route path="aboutUs" element={<AboutUs />} />
-					<Route path="contactUs" element={<ContactUs />} />
-					<Route path="freeEstimate" element={<FreeEstimate />} />
+
+					<Route path="/services" element={<Services />} />
+					<Route path="/customsoftware" element={<CustomSoftware />} />
+					<Route path="/mobileapps" element={<MobileApps />} />
+					<Route path="/websites" element={<Websites />} />
+
+					<Route path="/therevolution" element={<TheRevolution />} />
+					<Route path="/aboutus" element={<AboutUs />} />
+					<Route path="/contactus" element={<ContactUs />} />
+					<Route path="/freeestimate" element={<FreeEstimate />} />
+
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</ThemeProvider>
