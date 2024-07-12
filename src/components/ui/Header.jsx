@@ -9,6 +9,9 @@ import Tab from '@mui/material/Tab';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
@@ -32,11 +35,11 @@ const StyledLogo = styled('img')(({ theme }) => ({
 	transition: 'all .2s ease-out',
 
 	[theme.breakpoints.down('md')]: {
-		height: '4rem',
+		height: '4.6rem',
 		transition: 'all .2s ease-out',
 	},
 	[theme.breakpoints.down('sm')]: {
-		height: '3.5rem',
+		height: '4.2rem',
 		transition: 'all .2s ease-out',
 	},
 }));
@@ -109,13 +112,26 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 	},
 }));
 
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+	...theme.typography.iconButton,
+	marginLeft: 'auto',
+	'&:hover': {
+		backgroundColor: 'transparent',
+	},
+}));
+
 export default function Header() {
-	const [value, setValue] = useState(0);
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [open, setOpen] = useState(false);
-	const [selectedIndex, setSelectedIndex] = useState(0);
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const iOS =
+		typeof navigator !== 'undefined' &&
+		/iPad|iPhone|iPod/.test(navigator.userAgent);
+
+	const [value, setValue] = useState(0);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [openMenu, setOpenMenu] = useState(false);
+	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -123,18 +139,18 @@ export default function Header() {
 
 	const handleClick = (e) => {
 		setAnchorEl(e.currentTarget);
-		setOpen(true);
+		setOpenMenu(true);
 	};
 
 	const handleMenuItemClick = (e, i) => {
 		setAnchorEl(null);
-		setOpen(false);
+		setOpenMenu(false);
 		setSelectedIndex(i);
 	};
 
 	const handleClose = (e) => {
 		setAnchorEl(null);
-		setOpen(false);
+		setOpenMenu(false);
 	};
 
 	const menuOptions = [
@@ -178,7 +194,7 @@ export default function Header() {
 			<StyledMenu
 				id="simple-menu"
 				anchorEl={anchorEl}
-				open={open}
+				open={openMenu}
 				onClose={handleClose}
 				MenuListProps={{ onMouseLeave: handleClose }}
 			>
@@ -200,6 +216,27 @@ export default function Header() {
 		</>
 	);
 
+	const drawer = (
+		<>
+			<SwipeableDrawer
+				disableBackdropTransition={!iOS}
+				disableDiscovery={iOS}
+				open={openDrawer}
+				onClose={() => setOpenDrawer(false)}
+				onOpen={() => setOpenDrawer(true)}
+			>
+				Example Drawer
+			</SwipeableDrawer>
+
+			<StyledIconButton
+				onClick={() => setOpenDrawer(!openDrawer)}
+				disableRipple
+			>
+				<MenuIcon style={{ height: '50px', width: '50px' }} />
+			</StyledIconButton>
+		</>
+	);
+
 	return (
 		<>
 			<ElevationScroll>
@@ -216,7 +253,7 @@ export default function Header() {
 							/>
 						</Link>
 
-						{matches ? null : tabs}
+						{matches ? drawer : tabs}
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
