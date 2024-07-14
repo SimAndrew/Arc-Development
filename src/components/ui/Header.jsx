@@ -12,6 +12,12 @@ import MenuItem from '@mui/material/MenuItem';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
@@ -106,7 +112,6 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 	...theme.typography.menuItem,
-	opacity: 0.7,
 	'&:hover': {
 		opacity: 1,
 	},
@@ -118,6 +123,10 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 	'&:hover': {
 		backgroundColor: 'transparent',
 	},
+}));
+
+const StyledListItemText = styled(ListItemText)(({ theme }) => ({
+	...theme.typography.tab,
 }));
 
 export default function Header() {
@@ -160,6 +169,8 @@ export default function Header() {
 		{ name: 'Website Development', link: '/websites' },
 	];
 
+	const [open, setOpen] = React.useState(false);
+
 	const tabs = (
 		<>
 			<StyledTabs value={value} onChange={handleChange}>
@@ -170,7 +181,6 @@ export default function Header() {
 					onMouseOver={(event) => handleClick(event)}
 					label="Services"
 					component={Link}
-					to="/services"
 				/>
 				<StyledTab
 					label="The revolution"
@@ -200,7 +210,7 @@ export default function Header() {
 			>
 				{menuOptions.map((option, i) => (
 					<StyledMenuItem
-						key={option}
+						key={option.link}
 						component={Link}
 						to={option.link}
 						onClick={(event) => {
@@ -224,8 +234,114 @@ export default function Header() {
 				open={openDrawer}
 				onClose={() => setOpenDrawer(false)}
 				onOpen={() => setOpenDrawer(true)}
+				PaperProps={{
+					sx: {
+						backgroundColor: theme.palette.primary.main,
+					},
+				}}
 			>
-				Example Drawer
+				<List disablePadding>
+					<ListItemButton
+						onClick={() => {
+							setOpenDrawer(false);
+							setOpen(false);
+						}}
+						divider
+						component={Link}
+						to="/"
+					>
+						<StyledListItemText disableTypography>Home</StyledListItemText>
+					</ListItemButton>
+
+					<ListItemButton
+						onClick={() => setOpen(!open)}
+						divider
+						component={Link}
+					>
+						<StyledListItemText disableTypography>Services</StyledListItemText>
+
+						{open ? (
+							<ExpandLess style={{ color: theme.palette.white.main }} />
+						) : (
+							<ExpandMore style={{ color: theme.palette.white.main }} />
+						)}
+					</ListItemButton>
+
+					<Collapse in={open} timeout="auto" unmountOnExit>
+						<List dense disablePadding>
+							{menuOptions.map((option, i) => (
+								<ListItemButton
+									key={option.link}
+									component={Link}
+									to={option.link}
+									onClick={() => {
+										setOpenDrawer(false);
+										setOpen(false);
+									}}
+								>
+									<StyledListItemText style={{ display: 'grid' }}>
+										{option.name}
+									</StyledListItemText>
+								</ListItemButton>
+							))}
+						</List>
+					</Collapse>
+
+					<ListItemButton
+						onClick={() => {
+							setOpenDrawer(false);
+							setOpen(false);
+						}}
+						divider
+						component={Link}
+						to="/therevolution"
+					>
+						<StyledListItemText disableTypography>
+							The revolution
+						</StyledListItemText>
+					</ListItemButton>
+
+					<ListItemButton
+						onClick={() => {
+							setOpenDrawer(false);
+							setOpen(false);
+						}}
+						divider
+						component={Link}
+						to="/aboutus"
+					>
+						<StyledListItemText disableTypography>About Us</StyledListItemText>
+					</ListItemButton>
+
+					<ListItemButton
+						onClick={() => {
+							setOpenDrawer(false);
+							setOpen(false);
+						}}
+						divider
+						component={Link}
+						to="/contactus"
+					>
+						<StyledListItemText disableTypography>
+							Contact Us
+						</StyledListItemText>
+					</ListItemButton>
+
+					<ListItemButton
+						onClick={() => {
+							setOpenDrawer(false);
+							setOpen(false);
+						}}
+						style={{ backgroundColor: theme.palette.secondary.main }}
+						divider
+						component={Link}
+						to="/freeestimate"
+					>
+						<StyledListItemText disableTypography>
+							Free Estimate
+						</StyledListItemText>
+					</ListItemButton>
+				</List>
 			</SwipeableDrawer>
 
 			<StyledIconButton
