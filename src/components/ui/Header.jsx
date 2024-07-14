@@ -169,26 +169,36 @@ export default function Header() {
 		{ name: 'Website Development', link: '/websites' },
 	];
 
+	const routes = [
+		{ name: 'Home', link: '/' },
+		{
+			name: 'Services',
+			link: '/services',
+			ariaOwns: anchorEl ? 'simple-menu' : undefined,
+			ariaHasPopup: anchorEl ? 'true' : undefined,
+			mouseOver: (event) => handleClick(event),
+		},
+		{ name: 'The revolution', link: '/therevolution' },
+		{ name: 'About Us', link: '/aboutus' },
+		{ name: 'Contact Us', link: '/contactus' },
+	];
+
 	const [open, setOpen] = React.useState(false);
 
 	const tabs = (
 		<>
 			<StyledTabs value={value} onChange={handleChange}>
-				<StyledTab label="Home" component={Link} to="/" />
-				<StyledTab
-					aria-owns={anchorEl ? 'simple-menu' : undefined}
-					aria-haspopup={anchorEl ? 'true' : undefined}
-					onMouseOver={(event) => handleClick(event)}
-					label="Services"
-					component={Link}
-				/>
-				<StyledTab
-					label="The revolution"
-					component={Link}
-					to="/therevolution"
-				/>
-				<StyledTab label="About Us" component={Link} to="/aboutus" />
-				<StyledTab label="Contact Us" component={Link} to="/contactus" />
+				{routes.map((route, index) => (
+					<StyledTab
+						key={`${route}${index}`}
+						component={Link}
+						to={route.link}
+						label={route.name}
+						aria-owns={route.ariaOwns}
+						aria-haspopup={route.ariaHasPopup}
+						onMouseOver={route.mouseOver}
+					/>
+				))}
 			</StyledTabs>
 
 			<StyledButton
@@ -207,10 +217,11 @@ export default function Header() {
 				open={openMenu}
 				onClose={handleClose}
 				MenuListProps={{ onMouseLeave: handleClose }}
+				keepMounted
 			>
 				{menuOptions.map((option, i) => (
 					<StyledMenuItem
-						key={option.link}
+						key={`${option}${i}`}
 						component={Link}
 						to={option.link}
 						onClick={(event) => {
@@ -269,9 +280,9 @@ export default function Header() {
 
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<List dense disablePadding>
-							{menuOptions.map((option, i) => (
+							{menuOptions.map((option, index) => (
 								<ListItemButton
-									key={option.link}
+									key={`${option}${index}`}
 									component={Link}
 									to={option.link}
 									onClick={() => {
