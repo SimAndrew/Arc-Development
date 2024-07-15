@@ -251,6 +251,8 @@ export default function Header() {
 					},
 				}}
 			>
+				<StyledDiv />
+
 				<List disablePadding>
 					<ListItemButton
 						onClick={() => {
@@ -367,7 +369,7 @@ export default function Header() {
 	return (
 		<>
 			<ElevationScroll>
-				<AppBar position="fixed">
+				<AppBar position="fixed" style={{ zIndex: theme.zIndex.modal + 1 }}>
 					<Toolbar disableGutters>
 						<Link to="/" style={{ display: 'flex' }}>
 							<StyledLogo
