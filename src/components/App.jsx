@@ -12,14 +12,23 @@ import FreeEstimate from '../pages/FreeEstimate.jsx';
 import CustomSoftware from '../pages/CustomSoftware.jsx';
 import MobileApps from '../pages/MobileApps.jsx';
 import Websites from '../pages/Websites.jsx';
+import Footer from './ui/Footer.jsx';
 
 function App() {
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
 				<Header />
+
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route
+						path="/"
+						element={
+							<div style={{ height: '2000px' }}>
+								<Home />
+							</div>
+						}
+					/>
 
 					<Route path="/services" element={<Services />} />
 					<Route path="/customsoftware" element={<CustomSoftware />} />
@@ -33,6 +42,8 @@ function App() {
 
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
+
+				<Footer />
 			</ThemeProvider>
 		</BrowserRouter>
 	);
