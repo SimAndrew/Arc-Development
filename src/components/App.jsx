@@ -13,12 +13,21 @@ import CustomSoftware from '../pages/CustomSoftware.jsx';
 import MobileApps from '../pages/MobileApps.jsx';
 import Websites from '../pages/Websites.jsx';
 import Footer from './ui/Footer.jsx';
+import { useState } from 'react';
 
 function App() {
+	const [value, setValue] = useState(0);
+	const [selectedIndex, setSelectedIndex] = useState(0);
+
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
-				<Header />
+				<Header
+					value={value}
+					setValue={setValue}
+					selectedIndex={selectedIndex}
+					setSelectedIndex={setSelectedIndex}
+				/>
 
 				<Routes>
 					<Route
@@ -43,7 +52,12 @@ function App() {
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 
-				<Footer />
+				<Footer
+					value={value}
+					setValue={setValue}
+					selectedIndex={selectedIndex}
+					setSelectedIndex={setSelectedIndex}
+				/>
 			</ThemeProvider>
 		</BrowserRouter>
 	);

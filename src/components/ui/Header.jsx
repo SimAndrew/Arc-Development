@@ -129,21 +129,19 @@ const StyledListItemText = styled(ListItemText)(({ theme }) => ({
 	...theme.typography.tab,
 }));
 
-export default function Header() {
+export default function Header(props) {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const iOS =
 		typeof navigator !== 'undefined' &&
 		/iPad|iPhone|iPod/.test(navigator.userAgent);
 
-	const [value, setValue] = useState(0);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [openMenu, setOpenMenu] = useState(false);
-	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const handleChange = (event, newValue) => {
-		setValue(newValue);
+		props.setValue(newValue);
 	};
 
 	const handleClick = (e) => {
@@ -154,7 +152,7 @@ export default function Header() {
 	const handleMenuItemClick = (e, i) => {
 		setAnchorEl(null);
 		setOpenMenu(false);
-		setSelectedIndex(i);
+		props.setSelectedIndex(i);
 	};
 
 	const handleClose = (e) => {
@@ -187,7 +185,7 @@ export default function Header() {
 
 	const tabs = (
 		<>
-			<StyledTabs value={value} onChange={handleChange}>
+			<StyledTabs value={props.value} onChange={handleChange}>
 				{routes.map((route, index) => (
 					<StyledTab
 						key={`${route}${index}`}
@@ -228,7 +226,7 @@ export default function Header() {
 							handleMenuItemClick(event, i);
 							handleClose();
 						}}
-						selected={i === selectedIndex}
+						selected={i === props.selectedIndex}
 					>
 						{option.name}
 					</StyledMenuItem>
