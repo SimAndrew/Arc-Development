@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './ui/Header.jsx';
 import { ThemeProvider } from '@mui/material';
 import theme from './ui/Theme.js';
-import Home from '../pages/Home.jsx';
+import LandingPage from './LandingPage.jsx';
 import Services from '../pages/Services.jsx';
 import TheRevolution from '../pages/TheRevolution.jsx';
 import AboutUs from '../pages/AboutUs.jsx';
@@ -30,14 +30,7 @@ function App() {
 				/>
 
 				<Routes>
-					<Route
-						path="/"
-						element={
-							<div style={{ height: '2000px' }}>
-								<Home />
-							</div>
-						}
-					/>
+					<Route path="/" element={<LandingPage />} />
 
 					<Route path="/services" element={<Services />} />
 					<Route path="/customsoftware" element={<CustomSoftware />} />
