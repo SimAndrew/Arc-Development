@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import footerAdornment from '../../assets/FooterAdornment.svg';
+
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const StyledImg = styled('img')(({ theme }) => ({
 	width: '25em',
@@ -25,10 +29,11 @@ const StyledGridLink = styled(Grid)(({ theme }) => ({
 }));
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
-	margin: '3em',
+	margin: '1.96em',
 }));
 
 export default function Footer(props) {
+	const theme = useTheme();
 	return (
 		<Box
 			component="footer"
@@ -39,7 +44,17 @@ export default function Footer(props) {
 				position: 'relative',
 			}}
 		>
-			<Grid container justifyContent="center" sx={{ position: 'absolute' }}>
+			<Grid
+				container
+				justifyContent="center"
+				sx={{
+					position: 'absolute',
+					display: {
+						xs: 'none',
+						md: 'flex',
+					},
+				}}
+			>
 				<StyledGridItem item>
 					<Grid container direction="column" spacing={2}>
 						<StyledGridLink item component={Link} to="/">
@@ -97,7 +112,7 @@ export default function Footer(props) {
 				</StyledGridItem>
 
 				<StyledGridItem item>
-					<Grid container direction="column" spacing={2}>
+					<Grid container direction="column" spacing={1}>
 						<StyledGridLink item component={Link} to="/contactus">
 							Contact Us
 						</StyledGridLink>
@@ -106,6 +121,35 @@ export default function Footer(props) {
 			</Grid>
 
 			<StyledImg alt="black decorative slash" src={footerAdornment} />
+
+			<Grid
+				container
+				justifyContent="flex-end"
+				spacing={1.5}
+				style={{
+					position: 'relative',
+					marginTop: '-6em',
+					right: '1.5em',
+				}}
+			>
+				<StyledGridItem item component={Link} to="https://www.facebook.com">
+					<FacebookIcon
+						style={{ color: theme.palette.white.main, fontSize: 'large' }}
+					/>
+				</StyledGridItem>
+
+				<StyledGridItem item component={Link} to="https://www.twitter.com">
+					<TwitterIcon
+						style={{ color: theme.palette.white.main, fontSize: 'large' }}
+					/>
+				</StyledGridItem>
+
+				<StyledGridItem item component={Link} to="https://www.instagram.com">
+					<InstagramIcon
+						style={{ color: theme.palette.white.main, fontSize: 'large' }}
+					/>
+				</StyledGridItem>
+			</Grid>
 		</Box>
 	);
 }
