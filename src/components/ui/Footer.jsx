@@ -72,7 +72,7 @@ export default function Footer() {
 							Custom Software Development
 						</StyledGridLink>
 						<StyledGridLink item component={Link} to="/mobileapps">
-							Mobile App Development
+							IOS/Android App Development
 						</StyledGridLink>
 						<StyledGridLink item component={Link} to="/websites">
 							Website Development
