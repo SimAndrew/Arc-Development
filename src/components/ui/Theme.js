@@ -49,5 +49,24 @@ export default createTheme({
 			fontFamily: 'Raleway',
 			color: '#0B72B9',
 		},
+		subtitle1: {
+			fontSize: '1.25rem',
+			fontWeight: 300,
+			color: '#868686',
+		},
+		subtitle2: {
+			color: '#FFFFFF',
+			fontWeight: 300,
+			fontSize: '1.25rem',
+		},
+		learnButton: {
+			borderColor: '#0B72B9',
+			borderWidth: 2,
+			textTransform: 'none',
+			color: '#0B72B9',
+			borderRadius: 50,
+			fontFamily: 'Roboto',
+			fontWeight: 'bold',
+		},
 	},
 });

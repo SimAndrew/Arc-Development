@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -28,11 +28,11 @@ const StyledGridLink = styled(Grid)(({ theme }) => ({
 	textDecoration: 'none',
 }));
 
-const StyledGridItem = styled(Grid)(({ theme }) => ({
+const StyledGridItem = styled(Grid)(() => ({
 	margin: '1.96em',
 }));
 
-export default function Footer(props) {
+export default function Footer() {
 	const theme = useTheme();
 	return (
 		<Box

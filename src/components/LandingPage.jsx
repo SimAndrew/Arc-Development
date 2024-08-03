@@ -4,11 +4,14 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import animationData from '../animations/landinganimation/data.js';
 import { styled, useTheme } from '@mui/material/styles';
+import customSoftwareIcon from '../assets/CustomSoftwareIcon.svg';
 
 export default function LandingPage() {
 	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const defaultOptions = {
 		loop: true,
@@ -34,22 +37,29 @@ export default function LandingPage() {
 	}));
 
 	const StyledButtonLearn = styled(Button)(({ theme }) => ({
-		...theme.typography.estimate,
-		borderColor: theme.palette.primary.main,
-		color: theme.palette.primary.main,
-		borderWidth: 2,
-		textTransform: 'none',
-		borderRadius: 50,
-		fontFamily: 'Roboto',
-		fontWeight: 'bold',
+		...theme.typography.learnButton,
 		fontSize: '0.9rem',
 		height: 45,
 		width: 145,
 	}));
 
+	const StyledButtonSoftware = styled(Button)(({ theme }) => ({
+		...theme.typography.learnButton,
+		fontSize: '0.7rem',
+		height: 35,
+		padding: 5,
+		[theme.breakpoints.down('md')]: {
+			marginBottom: '2em',
+		},
+	}));
+
 	const StyledHeroGrid = styled(Grid)(({ theme }) => ({
 		minWidth: '21.5em',
 		marginLeft: '1em',
+	}));
+
+	const StyledCustomSoftwareIcon = styled('img')(() => ({
+		marginLeft: '2em',
 	}));
 
 	return (
@@ -103,6 +113,56 @@ export default function LandingPage() {
 							}}
 						>
 							<Lottie options={defaultOptions} height={'100%'} width={'100%'} />
+						</Grid>
+					</Grid>
+				</Grid>
+
+				<Grid item>
+					<Grid
+						container
+						direction="row"
+						justifyContent={matches ? 'center' : undefined}
+						sx={{
+							marginTop: '12em',
+							[theme.breakpoints.down('sm')]: {
+								padding: '0.5em',
+							},
+						}}
+					>
+						<Grid
+							item
+							style={{
+								marginLeft: matches ? '1em' : '5em',
+								textAlign: matches ? 'center' : undefined,
+							}}
+						>
+							<Typography variant="h4">Custom software development</Typography>
+							<Typography variant="subtitle1" style={{ marginBottom: '1em' }}>
+								Save Energy. Save Time. Save Money.
+							</Typography>
+							<Typography variant="subtitle1">
+								Complete digital solutions, from investigation to{' '}
+								<span
+									style={{
+										fontFamily: 'Pacifico',
+										color: theme.palette.secondary.main,
+									}}
+								>
+									celebration
+								</span>
+							</Typography>
+
+							<StyledButtonSoftware variant="outlined">
+								Learn More
+								<ArrowForwardIcon />
+							</StyledButtonSoftware>
+						</Grid>
+
+						<Grid item>
+							<StyledCustomSoftwareIcon
+								alt="custom software icon"
+								src={customSoftwareIcon}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>
