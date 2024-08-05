@@ -9,6 +9,7 @@ import animationData from '../animations/landinganimation/data.js';
 import { styled, useTheme } from '@mui/material/styles';
 import customSoftwareIcon from '../assets/CustomSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
+import websiteIcon from '../assets/websiteIcon.svg';
 
 export default function LandingPage() {
 	const theme = useTheme();
@@ -206,6 +207,46 @@ export default function LandingPage() {
 								alt="mobile phone icon"
 								src={mobileAppsIcon}
 							/>
+						</Grid>
+					</Grid>
+				</Grid>
+
+				<Grid item>
+					<Grid
+						container
+						direction="row"
+						justifyContent={matches ? 'center' : undefined}
+						sx={{
+							marginTop: '12em',
+							[theme.breakpoints.down('sm')]: {
+								padding: '0.5em',
+							},
+						}}
+					>
+						<Grid
+							item
+							style={{
+								marginLeft: matches ? '1em' : '5em',
+								textAlign: matches ? 'center' : undefined,
+							}}
+						>
+							<Typography variant="h4">Website Development</Typography>
+							<Typography variant="subtitle1" style={{ marginBottom: '1em' }}>
+								Reach More. Discover More. Sell More.
+							</Typography>
+
+							<Typography variant="subtitle1">
+								Optimized for Search Engines, built for speed.
+							</Typography>
+
+							<StyledButtonSoftware variant="outlined">
+								Learn More
+								<ArrowForwardIcon />
+							</StyledButtonSoftware>
+						</Grid>
+
+						<Grid item>
+							<StyledCustomSoftwareIcon alt="website icon" src={websiteIcon} />
 						</Grid>
 					</Grid>
 				</Grid>
