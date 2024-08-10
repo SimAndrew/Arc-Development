@@ -5,11 +5,14 @@ import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import animationData from '../animations/landinganimation/data.js';
 import { styled, useTheme } from '@mui/material/styles';
 import customSoftwareIcon from '../assets/CustomSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websiteIcon from '../assets/websiteIcon.svg';
+import revolutionBackground from '../assets/repeatingBackground.svg';
 
 export default function LandingPage() {
 	const theme = useTheme();
@@ -62,6 +65,30 @@ export default function LandingPage() {
 
 	const StyledCustomSoftwareIcon = styled('img')(() => ({
 		marginLeft: '2em',
+	}));
+
+	const StyledRevolutionBackground = styled('div')(() => ({
+		backgroundImage: `url(${revolutionBackground})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%',
+	}));
+
+	const StyledRevolutionCard = styled(Card)(({ theme }) => ({
+		position: 'absolute',
+		boxShadow: theme.shadows[10],
+		borderRadius: 15,
+		padding: '10em',
+		[theme.breakpoints.down('sm')]: {
+			paddingTop: '8em',
+			paddingBottom: '8em',
+			paddingLeft: 0,
+			paddingRight: 0,
+			borderRadius: 0,
+			width: '100%',
+		},
 	}));
 
 	return (
@@ -249,6 +276,44 @@ export default function LandingPage() {
 							<StyledCustomSoftwareIcon alt="website icon" src={websiteIcon} />
 						</Grid>
 					</Grid>
+				</Grid>
+
+				<Grid item>
+					<StyledRevolutionBackground>
+						<Grid
+							container
+							style={{ height: '100em', marginTop: '12em' }}
+							alignItems="center"
+							justifyContent="center"
+						>
+							<StyledRevolutionCard>
+								<CardContent>
+									<Grid
+										container
+										direction="column"
+										style={{ textAlign: 'center' }}
+									>
+										<Grid item>
+											<Typography variant="h3" gutterBottom>
+												The Revolution
+											</Typography>
+										</Grid>
+
+										<Grid item style={{ textAlign: 'center' }}>
+											<Typography variant="subtitle1">
+												Visionary insights coupled with cutting-edge technology
+												is a recipe for revolution.
+											</Typography>
+											<StyledButtonSoftware variant="outlined">
+												Learn More
+												<ArrowForwardIcon />
+											</StyledButtonSoftware>
+										</Grid>
+									</Grid>
+								</CardContent>
+							</StyledRevolutionCard>
+						</Grid>
+					</StyledRevolutionBackground>
 				</Grid>
 			</Grid>
 		</>
