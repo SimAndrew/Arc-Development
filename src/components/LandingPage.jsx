@@ -13,10 +13,12 @@ import customSoftwareIcon from '../assets/CustomSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websiteIcon from '../assets/websiteIcon.svg';
 import revolutionBackground from '../assets/repeatingBackground.svg';
+import infoBackground from '../assets/infoBackground.svg';
 
 export default function LandingPage() {
 	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesSM = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesXS = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const defaultOptions = {
 		loop: true,
@@ -91,6 +93,15 @@ export default function LandingPage() {
 		},
 	}));
 
+	const StyledInformationBackground = styled('div')(() => ({
+		backgroundImage: `url(${infoBackground})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%',
+	}));
+
 	return (
 		<>
 			<Grid
@@ -150,7 +161,7 @@ export default function LandingPage() {
 					<Grid
 						container
 						direction="row"
-						justifyContent={matches ? 'center' : undefined}
+						justifyContent={matchesSM ? 'center' : undefined}
 						sx={{
 							marginTop: '12em',
 							[theme.breakpoints.down('sm')]: {
@@ -161,8 +172,8 @@ export default function LandingPage() {
 						<Grid
 							item
 							style={{
-								marginLeft: matches ? '1em' : '5em',
-								textAlign: matches ? 'center' : undefined,
+								marginLeft: matchesSM ? '1em' : '5em',
+								textAlign: matchesSM ? 'center' : undefined,
 							}}
 						>
 							<Typography variant="h4">Custom software development</Typography>
@@ -200,7 +211,7 @@ export default function LandingPage() {
 					<Grid
 						container
 						direction="row"
-						justifyContent={matches ? 'center' : 'flex-end'}
+						justifyContent={matchesSM ? 'center' : 'flex-end'}
 						sx={{
 							marginTop: '12em',
 							[theme.breakpoints.down('sm')]: {
@@ -211,7 +222,7 @@ export default function LandingPage() {
 						<Grid
 							item
 							style={{
-								textAlign: matches ? 'center' : undefined,
+								textAlign: matchesSM ? 'center' : undefined,
 							}}
 						>
 							<Typography variant="h4">IOS/Android App Development</Typography>
@@ -220,7 +231,7 @@ export default function LandingPage() {
 							</Typography>
 							<Typography variant="subtitle1">
 								Integrate your web experience or create a standalone standalone
-								app {matches ? null : <br />}with either mobile platform.
+								app {matchesSM ? null : <br />}with either mobile platform.
 							</Typography>
 
 							<StyledButtonSoftware variant="outlined">
@@ -229,7 +240,7 @@ export default function LandingPage() {
 							</StyledButtonSoftware>
 						</Grid>
 
-						<Grid item style={{ marginRight: matches ? '1em' : '5em' }}>
+						<Grid item style={{ marginRight: matchesSM ? '1em' : '5em' }}>
 							<StyledCustomSoftwareIcon
 								alt="mobile phone icon"
 								src={mobileAppsIcon}
@@ -242,7 +253,7 @@ export default function LandingPage() {
 					<Grid
 						container
 						direction="row"
-						justifyContent={matches ? 'center' : undefined}
+						justifyContent={matchesSM ? 'center' : undefined}
 						sx={{
 							marginTop: '12em',
 							[theme.breakpoints.down('sm')]: {
@@ -253,8 +264,8 @@ export default function LandingPage() {
 						<Grid
 							item
 							style={{
-								marginLeft: matches ? '1em' : '5em',
-								textAlign: matches ? 'center' : undefined,
+								marginLeft: matchesSM ? '1em' : '5em',
+								textAlign: matchesSM ? 'center' : undefined,
 							}}
 						>
 							<Typography variant="h4">Website Development</Typography>
@@ -314,6 +325,95 @@ export default function LandingPage() {
 							</StyledRevolutionCard>
 						</Grid>
 					</StyledRevolutionBackground>
+				</Grid>
+
+				<Grid item>
+					<StyledInformationBackground>
+						<Grid
+							container
+							style={{ height: '80em' }}
+							alignItems="center"
+							direction="row"
+						>
+							<Grid
+								item
+								container
+								style={{
+									position: 'absolute',
+									textAlign: matchesXS ? 'center' : 'inherit',
+								}}
+								direction={matchesXS ? 'column' : 'row'}
+								spacing={matchesXS ? 10 : 0}
+							>
+								<Grid
+									item
+									sm
+									style={{
+										marginLeft: matchesXS ? 0 : matchesSM ? '2em' : '5em',
+									}}
+								>
+									<Grid container direction="column">
+										<Typography
+											variant="h2"
+											style={{ color: theme.palette.white.main }}
+										>
+											About Us
+										</Typography>
+										<Typography variant="subtitle2">
+											Let&apos;s get personal.
+										</Typography>
+										<Grid item>
+											<StyledButtonSoftware
+												variant="outlined"
+												style={{
+													color: theme.palette.white.main,
+													borderColor: theme.palette.white.main,
+												}}
+											>
+												Learn More
+												<ArrowForwardIcon
+													style={{ color: theme.palette.white.main }}
+												/>
+											</StyledButtonSoftware>
+										</Grid>
+									</Grid>
+								</Grid>
+
+								<Grid
+									item
+									sm
+									style={{
+										marginRight: matchesXS ? 0 : matchesSM ? '2em' : '5em',
+										textAlign: matchesXS ? 'center' : 'right',
+									}}
+								>
+									<Grid container direction="column">
+										<Typography
+											variant="h2"
+											style={{ color: theme.palette.white.main }}
+										>
+											Contact Us
+										</Typography>
+										<Typography variant="subtitle2">Say hello!</Typography>
+										<Grid item>
+											<StyledButtonSoftware
+												variant="outlined"
+												style={{
+													color: theme.palette.white.main,
+													borderColor: theme.palette.white.main,
+												}}
+											>
+												Learn More
+												<ArrowForwardIcon
+													style={{ color: theme.palette.white.main }}
+												/>
+											</StyledButtonSoftware>
+										</Grid>
+									</Grid>
+								</Grid>
+							</Grid>
+						</Grid>
+					</StyledInformationBackground>
 				</Grid>
 			</Grid>
 		</>
