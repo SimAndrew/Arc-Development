@@ -14,6 +14,9 @@ import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websiteIcon from '../assets/websiteIcon.svg';
 import revolutionBackground from '../assets/repeatingBackground.svg';
 import infoBackground from '../assets/infoBackground.svg';
+import CallToAction from './ui/CallToAction.jsx';
+import background from '../assets/background.jpg';
+import mobileBackground from '../assets/mobileBackground.jpg';
 
 export default function LandingPage() {
 	const theme = useTheme();
@@ -100,6 +103,20 @@ export default function LandingPage() {
 		backgroundRepeat: 'no-repeat',
 		height: '100%',
 		width: '100%',
+	}));
+
+	const StyledBackground = styled('div')(() => ({
+		backgroundImage: `url(${background})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundAttachment: 'fixed',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%',
+		[theme.breakpoints.down('md')]: {
+			backgroundImage: `url(${mobileBackground})`,
+			backgroundAttachment: 'inherit',
+		},
 	}));
 
 	return (
@@ -414,6 +431,12 @@ export default function LandingPage() {
 							</Grid>
 						</Grid>
 					</StyledInformationBackground>
+				</Grid>
+
+				<Grid item>
+					<StyledBackground>
+						<CallToAction />
+					</StyledBackground>
 				</Grid>
 			</Grid>
 		</>
