@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -147,11 +148,21 @@ export default function LandingPage() {
 								style={{ marginTop: '1em' }}
 							>
 								<Grid item>
-									<StyledButton variant="contained">Free Estimate</StyledButton>
+									<StyledButton
+										variant="contained"
+										component={Link}
+										to="/freeestimate"
+									>
+										Free Estimate
+									</StyledButton>
 								</Grid>
 
 								<Grid item>
-									<StyledButtonLearn variant="outlined">
+									<StyledButtonLearn
+										variant="outlined"
+										component={Link}
+										to="/therevolution"
+									>
 										Learn More
 										<ArrowForwardIcon />
 									</StyledButtonLearn>
@@ -209,7 +220,11 @@ export default function LandingPage() {
 								</span>
 							</Typography>
 
-							<StyledButtonSoftware variant="outlined">
+							<StyledButtonSoftware
+								variant="outlined"
+								component={Link}
+								to="/customsoftware"
+							>
 								Learn More
 								<ArrowForwardIcon />
 							</StyledButtonSoftware>
@@ -251,7 +266,11 @@ export default function LandingPage() {
 								app {matchesSM ? null : <br />}with either mobile platform.
 							</Typography>
 
-							<StyledButtonSoftware variant="outlined">
+							<StyledButtonSoftware
+								variant="outlined"
+								component={Link}
+								to="/mobileapps"
+							>
 								Learn More
 								<ArrowForwardIcon />
 							</StyledButtonSoftware>
@@ -294,7 +313,11 @@ export default function LandingPage() {
 								Optimized for Search Engines, built for speed.
 							</Typography>
 
-							<StyledButtonSoftware variant="outlined">
+							<StyledButtonSoftware
+								variant="outlined"
+								component={Link}
+								to="/websites"
+							>
 								Learn More
 								<ArrowForwardIcon />
 							</StyledButtonSoftware>
@@ -332,7 +355,11 @@ export default function LandingPage() {
 												Visionary insights coupled with cutting-edge technology
 												is a recipe for revolution.
 											</Typography>
-											<StyledButtonSoftware variant="outlined">
+											<StyledButtonSoftware
+												variant="outlined"
+												component={Link}
+												to="/therevolution"
+											>
 												Learn More
 												<ArrowForwardIcon />
 											</StyledButtonSoftware>
@@ -360,7 +387,6 @@ export default function LandingPage() {
 									textAlign: matchesXS ? 'center' : 'inherit',
 								}}
 								direction={matchesXS ? 'column' : 'row'}
-								spacing={matchesXS ? 10 : 0}
 							>
 								<Grid
 									item
@@ -369,7 +395,11 @@ export default function LandingPage() {
 										marginLeft: matchesXS ? 0 : matchesSM ? '2em' : '5em',
 									}}
 								>
-									<Grid container direction="column">
+									<Grid
+										container
+										style={{ marginBottom: matchesXS ? '10em' : 0 }}
+										direction="column"
+									>
 										<Typography
 											variant="h2"
 											style={{ color: theme.palette.white.main }}
@@ -382,6 +412,8 @@ export default function LandingPage() {
 										<Grid item>
 											<StyledButtonSoftware
 												variant="outlined"
+												component={Link}
+												to="/aboutus"
 												style={{
 													color: theme.palette.white.main,
 													borderColor: theme.palette.white.main,
@@ -415,6 +447,8 @@ export default function LandingPage() {
 										<Grid item>
 											<StyledButtonSoftware
 												variant="outlined"
+												component={Link}
+												to="/contactus"
 												style={{
 													color: theme.palette.white.main,
 													borderColor: theme.palette.white.main,

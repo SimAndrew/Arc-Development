@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -70,7 +71,11 @@ export default function CallToAction() {
 							justifyContent={matchesSM ? 'center' : undefined}
 							item
 						>
-							<StyledButtonLearn variant="outlined">
+							<StyledButtonLearn
+								variant="outlined"
+								component={Link}
+								to="/therevolution"
+							>
 								Learn More
 								<ArrowForwardIcon />
 							</StyledButtonLearn>
@@ -80,7 +85,11 @@ export default function CallToAction() {
 			</Grid>
 
 			<Grid item>
-				<StyledButtonEstimate variant="contained">
+				<StyledButtonEstimate
+					variant="contained"
+					component={Link}
+					to="/freeestimate"
+				>
 					Free Estimate
 				</StyledButtonEstimate>
 			</Grid>
