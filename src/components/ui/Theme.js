@@ -59,6 +59,16 @@ export default createTheme({
 			fontWeight: 300,
 			fontSize: '1.25rem',
 		},
+		body2: {
+			fontSize: '1.25rem',
+			fontWeight: 300,
+			color: '#868686',
+		},
+		caption: {
+			fontSize: '1rem',
+			fontWeight: 300,
+			color: '#868686',
+		},
 		learnButton: {
 			borderColor: '#0B72B9',
 			borderWidth: 2,
