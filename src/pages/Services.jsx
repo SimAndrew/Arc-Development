@@ -13,7 +13,6 @@ import websiteIcon from '../assets/websiteIcon.svg';
 export default function Services(props) {
 	const theme = useTheme();
 	const matchesSM = useMediaQuery(theme.breakpoints.down('md'));
-	// const matchesXS = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const StyledButtonSoftware = styled(Button)(({ theme }) => ({
 		...theme.typography.learnButton,
