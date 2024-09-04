@@ -13,6 +13,9 @@ import analytics from '../assets/analytics.svg';
 import seo from '../assets/seo.svg';
 import outreach from '../assets/outreach.svg';
 import ecommerce from '../assets/ecommerce.svg';
+import CallToAction from '../components/ui/CallToAction.jsx';
+import background from '../assets/background.jpg';
+import mobileBackground from '../assets/mobileBackground.jpg';
 
 const StyledGridRowContainer = styled(Grid)(({ theme }) => ({
 	paddingLeft: '5em',
@@ -35,6 +38,20 @@ function Websites() {
 	const matchesLG = useMediaQuery(theme.breakpoints.down('lg'));
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+
+	const StyledBackground = styled('div')(() => ({
+		backgroundImage: `url(${background})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundAttachment: 'fixed',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%',
+		[theme.breakpoints.down('md')]: {
+			backgroundImage: `url(${mobileBackground})`,
+			backgroundAttachment: 'inherit',
+		},
+	}));
 
 	return (
 		<Grid container direction="column">
@@ -76,7 +93,10 @@ function Websites() {
 							Website Development
 						</Typography>
 					</Grid>
-					<Grid item>
+					<Grid
+						item
+						style={{ marginLeft: matchesSM ? 0 : '1em', maxWidth: '30em' }}
+					>
 						<Typography
 							textAlign={matchesLG ? 'center' : undefined}
 							variant="body2"
@@ -117,13 +137,18 @@ function Websites() {
 			<StyledGridRowContainer
 				item
 				container
-				direction="row"
+				direction={matchesMD ? 'column' : 'row'}
 				alignItems="center"
+				style={{ marginTop: '15em' }}
 			>
 				<Grid item>
 					<Grid container direction="column">
 						<Grid item>
-							<Typography variant="h4" gutterBottom>
+							<Typography
+								variant="h4"
+								textAlign={matchesSM ? 'center' : undefined}
+								gutterBottom
+							>
 								Analytics
 							</Typography>
 						</Grid>
@@ -137,8 +162,14 @@ function Websites() {
 					</Grid>
 				</Grid>
 
-				<Grid item>
-					<Typography variant="body2" style={{ maxWidth: '30em' }}>
+				<Grid
+					item
+					style={{ marginLeft: matchesSM ? 0 : '1em', maxWidth: '28em' }}
+				>
+					<Typography
+						textAlign={matchesSM ? 'center' : undefined}
+						variant="body2"
+					>
 						Knowledge is power, and data is 21st Century gold. Analyzing this
 						data can reveal hidden patterns and trends in your business,
 						empowering you to make smarter decisions with measurable effects.
@@ -149,13 +180,19 @@ function Websites() {
 			<StyledGridRowContainer
 				item
 				container
-				direction="row"
+				direction={matchesMD ? 'column' : 'row'}
 				alignItems="center"
+				justifyContent="flex-end"
+				style={{ marginBottom: '15em', marginTop: '15em' }}
 			>
 				<Grid item>
 					<Grid container direction="column">
 						<Grid item>
-							<Typography variant="h4" gutterBottom>
+							<Typography
+								textAlign={matchesSM ? 'center' : undefined}
+								variant="h4"
+								gutterBottom
+							>
 								E-Commerce
 							</Typography>
 						</Grid>
@@ -165,10 +202,14 @@ function Websites() {
 					</Grid>
 				</Grid>
 
-				<Grid item>
+				<Grid
+					item
+					style={{ marginLeft: matchesSM ? 0 : '1em', maxWidth: '30em' }}
+				>
 					<Typography
 						align={matchesSM ? 'center' : undefined}
 						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
 						paragraph
 					>
 						It’s no secret that people like to shop online.
@@ -176,6 +217,7 @@ function Websites() {
 					<Typography
 						align={matchesSM ? 'center' : undefined}
 						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
 						paragraph
 					>
 						In 2017 over $2.3 trillion was spent in e-commerce, and it’s time
@@ -183,6 +225,109 @@ function Websites() {
 					</Typography>
 				</Grid>
 			</StyledGridRowContainer>
+
+			<StyledGridRowContainer
+				item
+				container
+				direction={matchesMD ? 'column' : 'row'}
+				alignItems="center"
+			>
+				<Grid item>
+					<Grid container direction="column">
+						<Grid item>
+							<Typography
+								textAlign={matchesSM ? 'center' : undefined}
+								variant="h4"
+								gutterBottom
+							>
+								Outreach
+							</Typography>
+						</Grid>
+						<Grid item>
+							<img src={outreach} alt="megaphone" />
+						</Grid>
+					</Grid>
+				</Grid>
+
+				<Grid
+					item
+					style={{ marginLeft: matchesSM ? 0 : '1em', maxWidth: '30em' }}
+				>
+					<Typography
+						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
+					>
+						Draw people in with a dazzling website. Showing off your products
+						online is a great way to help customers decide what’s right for them
+						before visiting in person.
+					</Typography>
+				</Grid>
+			</StyledGridRowContainer>
+
+			<StyledGridRowContainer
+				item
+				container
+				direction={matchesMD ? 'column' : 'row'}
+				alignItems="center"
+				justifyContent="flex-end"
+				style={{ marginTop: '15em', marginBottom: '15em' }}
+			>
+				<Grid item>
+					<Grid container direction="column">
+						<Grid item>
+							<Typography
+								textAlign={matchesSM ? 'center' : undefined}
+								variant="h4"
+								gutterBottom
+							>
+								Search Engine
+								<br />
+								Optimization
+							</Typography>
+						</Grid>
+						<Grid item>
+							<img src={seo} alt="website standing on winner's podium" />
+						</Grid>
+					</Grid>
+				</Grid>
+
+				<Grid
+					item
+					style={{ marginLeft: matchesSM ? 0 : '1em', maxWidth: '30em' }}
+				>
+					<Typography
+						align={matchesSM ? 'center' : undefined}
+						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
+						paragraph
+					>
+						How often have you ever been to the second page of Google results?
+					</Typography>
+					<Typography
+						align={matchesSM ? 'center' : undefined}
+						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
+						paragraph
+					>
+						If you’re like us, probably never.
+					</Typography>
+					<Typography
+						align={matchesSM ? 'center' : undefined}
+						variant="body2"
+						textAlign={matchesSM ? 'center' : undefined}
+						paragraph
+					>
+						Customers don’t go there either, so we make sure your website is
+						designed to end up on top.
+					</Typography>
+				</Grid>
+			</StyledGridRowContainer>
+
+			<Grid item>
+				<StyledBackground>
+					<CallToAction />
+				</StyledBackground>
+			</Grid>
 		</Grid>
 	);
 }
