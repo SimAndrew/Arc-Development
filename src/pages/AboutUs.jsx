@@ -8,6 +8,9 @@ import person from '../assets/person.svg';
 import history from '../assets/history.svg';
 import yearbook from '../assets/yearbook.jpg';
 import puppy from '../assets/puppy.jpg';
+import CallToAction from '../components/ui/CallToAction.jsx';
+import background from '../assets/background.jpg';
+import mobileBackground from '../assets/mobileBackground.jpg';
 
 const StyledMissionStatement = styled(Grid)(({ theme }) => ({
 	fontStyle: 'italic',
@@ -43,13 +46,37 @@ function AboutUs() {
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
+	const StyledBackground = styled('div')(() => ({
+		backgroundImage: `url(${background})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundAttachment: 'fixed',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%',
+		[theme.breakpoints.down('md')]: {
+			backgroundImage: `url(${mobileBackground})`,
+			backgroundAttachment: 'inherit',
+		},
+	}));
+
 	return (
 		<Grid container direction="column">
-			<StyledGridRowContainer item style={{ marginTop: '2em' }}>
-				<Typography variant="h2">About Us</Typography>
+			<StyledGridRowContainer
+				item
+				style={{ marginTop: matchesMD ? '1em' : '2em' }}
+			>
+				<Typography textAlign={matchesMD ? 'center' : undefined} variant="h2">
+					About Us
+				</Typography>
 			</StyledGridRowContainer>
 
-			<StyledGridRowContainer item container justifyContent="center">
+			<StyledGridRowContainer
+				item
+				container
+				justifyContent="center"
+				style={{ marginTop: '3em' }}
+			>
 				<StyledMissionStatement variant="h4" textAlign="center">
 					Whether it be person to person, business to consumer, or an individual
 					to their interests, technology is meant to bring us closer to what we
@@ -59,7 +86,14 @@ function AboutUs() {
 				</StyledMissionStatement>
 			</StyledGridRowContainer>
 
-			<StyledGridRowContainer item container justifyContent="space-around">
+			<StyledGridRowContainer
+				item
+				container
+				justifyContent="space-around"
+				style={{ marginTop: '10em', marginBottom: '10em' }}
+				direction={matchesMD ? 'column' : 'row'}
+				alignItems={matchesMD ? 'center' : undefined}
+			>
 				<Grid item>
 					<Grid
 						item
@@ -69,7 +103,11 @@ function AboutUs() {
 						style={{ maxWidth: '35em' }}
 					>
 						<Grid item>
-							<Typography variant="h4" gutterBottom>
+							<Typography
+								textAlign={matchesMD ? 'center' : undefined}
+								variant="h4"
+								gutterBottom
+							>
 								History
 							</Typography>
 						</Grid>
@@ -78,24 +116,37 @@ function AboutUs() {
 							<Typography
 								variant="body2"
 								paragraph
+								textAlign={matchesMD ? 'center' : undefined}
 								style={{ fontWeight: 700, fontStyle: 'italic' }}
 							>
 								We&apos;re the new kid on the block
 							</Typography>
 
-							<Typography variant="body2" paragraph>
+							<Typography
+								variant="body2"
+								paragraph
+								textAlign={matchesMD ? 'center' : undefined}
+							>
 								Founded in 2019, we&apos;re ready to get our hands on the
 								world&apos;s business problems.
 							</Typography>
 
-							<Typography variant="body2" paragraph>
+							<Typography
+								variant="body2"
+								paragraph
+								textAlign={matchesMD ? 'center' : undefined}
+							>
 								It all started with one question: Why aren&apos;t all businesses
 								using available technology? There are many different answers to
 								that question: economic barriers, social barriers, educational
 								barriers, and sometimes institutional barriers.
 							</Typography>
 
-							<Typography variant="body2" paragraph>
+							<Typography
+								variant="body2"
+								paragraph
+								textAlign={matchesMD ? 'center' : undefined}
+							>
 								We aim to be a powerful force in overcoming these obstacles.
 								Recent developments in software engineering and computing power,
 								compounded by the proliferation of smart phones, has opened up
@@ -105,7 +156,11 @@ function AboutUs() {
 								full advantage of these advancements is the name of the game.
 							</Typography>
 
-							<Typography variant="body2" paragraph>
+							<Typography
+								variant="body2"
+								paragraph
+								textAlign={matchesMD ? 'center' : undefined}
+							>
 								All this change can be a lot to keep up with, and that&apos;s
 								where we come in.
 							</Typography>
@@ -129,6 +184,7 @@ function AboutUs() {
 				container
 				direction="column"
 				alignItems="center"
+				style={{ marginBottom: '15em' }}
 			>
 				<Grid item>
 					<Typography textAlign="center" variant="h4" gutterBottom>
@@ -147,17 +203,16 @@ function AboutUs() {
 					<StyledAvatar alt="avatar" src={person} />
 				</Grid>
 
-				<Grid item container>
-					<Grid item container direction="column" lg>
-						<Grid item>
-							<img src={yearbook} alt="yearbook" />
-						</Grid>
-						<Grid item>
-							<Typography variant="caption">Coding</Typography>
-						</Grid>
-					</Grid>
-
-					<Grid item lg style={{ maxWidth: '45em', padding: '1.25em' }}>
+				<Grid item container justifyContent={matchesMD ? 'center' : undefined}>
+					<Grid
+						item
+						lg
+						sx={{
+							maxWidth: '45em',
+							padding: '1.25em',
+							display: { md: 'block', sm: 'block', lg: 'none' },
+						}}
+					>
 						<Typography variant="body1" align="center" paragraph>
 							I taught myself basic coding from a library book in third grade,
 							and ever since then my passion has solely been set on learning —
@@ -169,10 +224,58 @@ function AboutUs() {
 							with the intuition I have developed.
 						</Typography>
 					</Grid>
-
-					<Grid item container direction="column" lg alignItems="flex-end">
+					<Grid
+						item
+						container
+						direction="column"
+						lg
+						alignItems={matchesMD ? 'center' : undefined}
+						style={{ marginBottom: matchesMD ? '2.5em' : 0 }}
+					>
 						<Grid item>
-							<img src={puppy} alt="terrier puppy" />
+							<img
+								src={yearbook}
+								alt="yearbook"
+								style={{ maxWidth: matchesMD ? 300 : undefined }}
+							/>
+						</Grid>
+						<Grid item>
+							<Typography variant="caption">Coding</Typography>
+						</Grid>
+					</Grid>
+					<Grid
+						item
+						lg
+						sx={{
+							maxWidth: '45em',
+							padding: '1.25em',
+							display: { md: 'none', sm: 'none', lg: 'block' },
+						}}
+					>
+						<Typography variant="body1" align="center" paragraph>
+							I taught myself basic coding from a library book in third grade,
+							and ever since then my passion has solely been set on learning —
+							learning about computers, learning mathematics and philosophy,
+							studying design, always just learning.
+						</Typography>
+						<Typography variant="body1" align="center" paragraph>
+							Now I’m ready to apply everything I’ve learned, and to help others
+							with the intuition I have developed.
+						</Typography>
+					</Grid>
+					<Grid
+						item
+						container
+						direction="column"
+						lg
+						alignItems={matchesMD ? 'center' : 'flex-end'}
+					>
+						<Grid item>
+							<img
+								src={puppy}
+								alt="terrier puppy"
+								style={{ maxWidth: matchesMD ? 300 : undefined }}
+							/>
 						</Grid>
 						<Grid item>
 							<Typography variant="caption">
@@ -182,6 +285,12 @@ function AboutUs() {
 					</Grid>
 				</Grid>
 			</StyledGridRowContainer>
+
+			<Grid item>
+				<StyledBackground>
+					<CallToAction />
+				</StyledBackground>
+			</Grid>
 		</Grid>
 	);
 }
