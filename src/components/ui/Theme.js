@@ -79,4 +79,32 @@ export default createTheme({
 			fontWeight: 'bold',
 		},
 	},
+	styleOverrides: {
+		MuiInputLabel: {
+			root: {
+				color: '#0B72B9',
+				fontSize: '1rem',
+			},
+		},
+	},
+	MuiInput: {
+		styleOverrides: {
+			underline: {
+				'&:before': {
+					borderBottom: `2px solid #0B72B9`,
+				},
+				'&:hover:before': {
+					borderBottom: '2px solid #0B72B9',
+				},
+				'&:after': {
+					borderBottom: '2px solid #0B72B9',
+				},
+				'&:MuiInput-root': {
+					color: '#0B72B9',
+					fontFamily: 'Arial',
+					fontWeight: 'bold',
+				},
+			},
+		},
+	},
 });

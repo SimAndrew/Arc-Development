@@ -78,111 +78,166 @@ function ContactUs() {
 				marginTop: '-2em',
 			}}
 		>
-			<Grid item container direction="column" justifyContent="center" lg={3}>
+			<Grid
+				item
+				container
+				direction="column"
+				justifyContent="center"
+				alignItems="center"
+				lg={4}
+				xl={3}
+			>
 				<Grid item>
-					<Typography variant="h2" style={{ lineHeight: 1 }}>
-						Contact Us
-					</Typography>
-					<Typography
-						variant="body2"
-						style={{ color: theme.palette.primary.main }}
-					>
-						We&apos;re waiting.
-					</Typography>
-				</Grid>
+					<Grid container direction="column">
+						<Grid item>
+							<Typography variant="h2" style={{ lineHeight: 1 }}>
+								Contact Us
+							</Typography>
+							<Typography
+								variant="body2"
+								style={{ color: theme.palette.primary.main }}
+							>
+								We&apos;re waiting.
+							</Typography>
+						</Grid>
 
-				<Grid item container>
-					<Grid item>
-						<PhoneIcon
-							style={{
-								color: theme.palette.primary.main,
-								marginRight: '0.5em',
-								verticalAlign: 'center',
-							}}
-						/>
-					</Grid>
-					<Grid item>
-						<Typography
-							variant="body2"
-							style={{ color: theme.palette.primary.main, fontSize: '1rem' }}
+						<Grid item container style={{ marginTop: '2em' }}>
+							<Grid item>
+								<PhoneIcon
+									style={{
+										color: theme.palette.primary.main,
+										marginRight: '0.5em',
+										verticalAlign: 'center',
+									}}
+								/>
+							</Grid>
+							<Grid item>
+								<Typography
+									variant="body2"
+									style={{
+										color: theme.palette.primary.main,
+										fontSize: '1rem',
+									}}
+								>
+									(123) 123 456 789
+								</Typography>
+							</Grid>
+						</Grid>
+
+						<Grid item container style={{ marginBottom: '2em' }}>
+							<Grid item>
+								<MailIcon
+									style={{
+										color: theme.palette.primary.main,
+										marginRight: '0.5em',
+										verticalAlign: 'center',
+									}}
+								/>
+							</Grid>
+							<Grid item>
+								<Typography
+									variant="body2"
+									style={{
+										color: theme.palette.primary.main,
+										fontSize: '1rem',
+									}}
+								>
+									arcdev@gmail.com
+								</Typography>
+							</Grid>
+						</Grid>
+
+						<Grid
+							item
+							container
+							direction="column"
+							style={{ maxWidth: '20em' }}
 						>
-							(123) 123 456 789
-						</Typography>
-					</Grid>
-				</Grid>
+							<Grid item>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Name"
+									id="name"
+									value={name}
+									onChange={(event) => setName(event.target.value)}
+								/>
+							</Grid>
 
-				<Grid item container>
-					<Grid item>
-						<MailIcon
-							style={{
-								color: theme.palette.primary.main,
-								marginRight: '0.5em',
-								verticalAlign: 'center',
-							}}
-						/>
-					</Grid>
-					<Grid item>
-						<Typography
-							variant="body2"
-							style={{ color: theme.palette.primary.main, fontSize: '1rem' }}
+							<Grid item>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Email"
+									id="email"
+									value={email}
+									onChange={(event) => setEmail(event.target.value)}
+								/>
+							</Grid>
+
+							<Grid item>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Phone"
+									id="phone"
+									value={phone}
+									onChange={(event) => setPhone(event.target.value)}
+								/>
+							</Grid>
+						</Grid>
+
+						<Grid item style={{ maxWidth: '20em' }}>
+							<TextField
+								fullWidth
+								variant="standard"
+								value={message}
+								multiline
+								id="message"
+								rows={10}
+								onChange={(event) => setMessage(event.target.value)}
+								InputProps={{ disableUnderline: true }}
+								sx={{
+									border: '2px solid #0B72B9',
+									marginTop: '5em',
+									borderRadius: 1,
+								}}
+							/>
+						</Grid>
+
+						<Grid
+							item
+							container
+							justifyContent="center"
+							style={{ marginTop: '2em' }}
 						>
-							arcdev@gmail.com
-						</Typography>
+							<Button
+								variant="contained"
+								sx={{
+									...theme.typography.estimate,
+									borderRadius: 50,
+									height: 45,
+									width: 245,
+									fontSize: '1rem',
+									backgroundColor: theme.palette.secondary.main,
+									'&:hover': {
+										backgroundColor: theme.palette.secondary.light,
+									},
+								}}
+							>
+								Send Message <SendIcon style={{ marginLeft: '1em' }} />
+							</Button>
+						</Grid>
 					</Grid>
-				</Grid>
-
-				<Grid item container>
-					<Grid item>
-						<TextField
-							label="Name"
-							id="name"
-							value={name}
-							onChange={(event) => setName(event.target.value)}
-						/>
-					</Grid>
-
-					<Grid item>
-						<TextField
-							label="Email"
-							id="email"
-							value={email}
-							onChange={(event) => setEmail(event.target.value)}
-						/>
-					</Grid>
-
-					<Grid item>
-						<TextField
-							label="Phone"
-							id="phone"
-							value={phone}
-							onChange={(event) => setPhone(event.target.value)}
-						/>
-					</Grid>
-				</Grid>
-
-				<Grid>
-					<TextField
-						value={message}
-						multiline
-						id="message"
-						rows={10}
-						onChange={(event) => setMessage(event.target.value)}
-					/>
-				</Grid>
-
-				<Grid item>
-					<Button variant="contained">
-						Send Message <SendIcon />
-					</Button>
 				</Grid>
 			</Grid>
 
-			<Grid item container lg={9}>
+			<Grid item container lg={8} xl={9}>
 				<StyledBackground>
 					<Grid
 						item
 						style={{
-							marginLeft: matchesSM ? 0 : '5em',
+							marginLeft: matchesSM ? 0 : '3em',
 							textAlign: matchesSM ? 'center' : 'inherit',
 						}}
 					>
