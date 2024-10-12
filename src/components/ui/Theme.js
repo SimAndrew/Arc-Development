@@ -88,6 +88,10 @@ export default createTheme({
 		},
 	},
 	MuiInput: {
+		root: {
+			color: '#0B72B9',
+			fontSize: '1rem',
+		},
 		styleOverrides: {
 			underline: {
 				'&:before': {

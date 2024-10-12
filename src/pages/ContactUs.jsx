@@ -19,7 +19,7 @@ const StyledBackground = styled('div')(({ theme }) => ({
 	backgroundPosition: 'center',
 	backgroundSize: 'cover',
 	backgroundRepeat: 'no-repeat',
-	height: '65em',
+	height: '60em',
 	width: '100%',
 	paddingBottom: '10em',
 	paddingTop: 0,
@@ -71,13 +71,7 @@ function ContactUs() {
 	const [message, setMessage] = useState('');
 
 	return (
-		<Grid
-			container
-			direction="row"
-			style={{
-				marginTop: '-2em',
-			}}
-		>
+		<Grid container direction="row">
 			<Grid
 				item
 				container
@@ -86,14 +80,23 @@ function ContactUs() {
 				alignItems="center"
 				lg={4}
 				xl={3}
+				style={{
+					marginBottom: matchesMD ? '50em' : 0,
+					marginTop: matchesSM ? '1em' : matchesMD ? '5em' : 0,
+				}}
 			>
 				<Grid item>
 					<Grid container direction="column">
 						<Grid item>
-							<Typography variant="h2" style={{ lineHeight: 1 }}>
+							<Typography
+								textAlign={matchesMD ? 'center' : 0}
+								variant="h2"
+								style={{ lineHeight: 1 }}
+							>
 								Contact Us
 							</Typography>
 							<Typography
+								textAlign={matchesMD ? 'center' : 0}
 								variant="body2"
 								style={{ color: theme.palette.primary.main }}
 							>
@@ -153,7 +156,7 @@ function ContactUs() {
 							direction="column"
 							style={{ maxWidth: '20em' }}
 						>
-							<Grid item>
+							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
 									fullWidth
 									variant="standard"
@@ -164,7 +167,7 @@ function ContactUs() {
 								/>
 							</Grid>
 
-							<Grid item>
+							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
 									fullWidth
 									variant="standard"
@@ -175,7 +178,7 @@ function ContactUs() {
 								/>
 							</Grid>
 
-							<Grid item>
+							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
 									fullWidth
 									variant="standard"
@@ -232,42 +235,56 @@ function ContactUs() {
 				</Grid>
 			</Grid>
 
-			<Grid item container lg={8} xl={9}>
+			<Grid
+				item
+				container
+				lg={8}
+				xl={9}
+				direction={matchesMD ? 'column' : 'row'}
+				justifyContent={matchesMD ? 'center' : undefined}
+				alignItems="center"
+			>
 				<StyledBackground>
 					<Grid
 						item
 						style={{
-							marginLeft: matchesSM ? 0 : '3em',
-							textAlign: matchesSM ? 'center' : 'inherit',
+							marginLeft: matchesMD ? 0 : '3em',
+							textAlign: matchesMD ? 'center' : 'inherit',
 						}}
 					>
 						<Grid container direction="column">
 							<Grid item>
-								<Typography variant="h2">
+								<Typography
+									variant="h2"
+									alignItems={matchesMD ? 'center' : undefined}
+								>
 									Simple Software.
 									<br />
 									Revolutionary Results.
 								</Typography>
 
-								<Typography variant="subtitle2" style={{ fontSize: '1.5rem' }}>
+								<Typography
+									variant="subtitle2"
+									textAlign={matchesMD ? 'center' : undefined}
+									style={{ fontSize: '1.5rem' }}
+								>
 									Take advantage of the 21st Century.
 								</Typography>
-
-								<Grid
-									container
-									justifyContent={matchesSM ? 'center' : undefined}
-									item
-								>
-									<StyledButtonLearn
-										variant="outlined"
-										component={Link}
-										to="/therevolution"
-									>
-										Learn More
-										<ArrowForwardIcon />
-									</StyledButtonLearn>
-								</Grid>
 							</Grid>
+						</Grid>
+						<Grid
+							container
+							justifyContent={matchesMD ? 'center' : undefined}
+							item
+						>
+							<StyledButtonLearn
+								variant="outlined"
+								component={Link}
+								to="/therevolution"
+							>
+								Learn More
+								<ArrowForwardIcon />
+							</StyledButtonLearn>
 						</Grid>
 					</Grid>
 
