@@ -67,8 +67,42 @@ function ContactUs() {
 
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+	const [emailHelper, setEmailHelper] = useState('');
 	const [phone, setPhone] = useState('');
+	const [phoneHelper, setPhoneHelper] = useState('');
 	const [message, setMessage] = useState('');
+
+	const onChange = (event) => {
+		let valid;
+
+		switch (event.target.id) {
+			case 'email':
+				setEmail(event.target.value);
+				valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+					event.target.value,
+				);
+				if (!valid) {
+					setEmailHelper('Invalid email address');
+				} else {
+					setEmailHelper('');
+				}
+				break;
+
+			case 'phone':
+				setPhone(event.target.value);
+				valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(
+					event.target.value,
+				);
+				if (!valid) {
+					setPhoneHelper('Invalid phone number');
+				} else {
+					setPhoneHelper('');
+				}
+				break;
+			default:
+				break;
+		}
+	};
 
 	return (
 		<Grid container direction="row">
@@ -122,7 +156,12 @@ function ContactUs() {
 										fontSize: '1rem',
 									}}
 								>
-									(123) 123 456 789
+									<a
+										href="tel:1231236666"
+										style={{ textDecoration: 'none', color: 'inherit' }}
+									>
+										(123) 123 6666
+									</a>
 								</Typography>
 							</Grid>
 						</Grid>
@@ -145,7 +184,12 @@ function ContactUs() {
 										fontSize: '1rem',
 									}}
 								>
-									arcdev@gmail.com
+									<a
+										href="mailto:test@gmail.com"
+										style={{ textDecoration: 'none', color: 'inherit' }}
+									>
+										test@gmail.com
+									</a>
 								</Typography>
 							</Grid>
 						</Grid>
@@ -174,7 +218,9 @@ function ContactUs() {
 									label="Email"
 									id="email"
 									value={email}
-									onChange={(event) => setEmail(event.target.value)}
+									onChange={onChange}
+									error={emailHelper.length !== 0}
+									helperText={emailHelper}
 								/>
 							</Grid>
 
@@ -185,7 +231,9 @@ function ContactUs() {
 									label="Phone"
 									id="phone"
 									value={phone}
-									onChange={(event) => setPhone(event.target.value)}
+									onChange={onChange}
+									error={phoneHelper.length !== 0}
+									helperText={phoneHelper}
 								/>
 							</Grid>
 						</Grid>
@@ -215,6 +263,12 @@ function ContactUs() {
 							style={{ marginTop: '2em' }}
 						>
 							<Button
+								disabled={
+									name.length === 0 ||
+									message.length === 0 ||
+									email.length === 0 ||
+									phone.length === 0
+								}
 								variant="contained"
 								sx={{
 									...theme.typography.estimate,
