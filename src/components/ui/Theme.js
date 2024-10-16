@@ -48,6 +48,7 @@ export default createTheme({
 			fontWeight: 500,
 			fontFamily: 'Raleway',
 			color: '#0B72B9',
+			lineHeight: 1,
 		},
 		subtitle1: {
 			fontSize: '1.25rem',
