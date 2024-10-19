@@ -367,6 +367,16 @@ function FreeEstimate() {
 		}
 	};
 
+	const handleSelect = (id) => {
+		const newQuestions = cloneDeep(questions);
+		const currentlyActive = newQuestions.filter((question) => question.active);
+		const activeIndex = currentlyActive[0].id - 1;
+		const newSelected = newQuestions[activeIndex].options[id - 1];
+
+		newSelected.selected = !newSelected.selected;
+		setQuestions(newQuestions);
+	};
+
 	return (
 		<Grid container direction="row">
 			<Grid item container direction="column" lg>
@@ -395,7 +405,7 @@ function FreeEstimate() {
 								style={{
 									marginRight: '10em',
 									maxWidth: '50em',
-									marginTop: '7.5em',
+									marginTop: '2.5em',
 								}}
 							>
 								<Typography
@@ -405,6 +415,7 @@ function FreeEstimate() {
 										fontWeight: 500,
 										fontSize: '2.25rem',
 										marginTop: '5em',
+										lineHeight: 1.25,
 									}}
 								>
 									{question.title}
@@ -422,8 +433,24 @@ function FreeEstimate() {
 
 							<Grid item container>
 								{question.options.map((option) => (
-									<Grid item container direction="column" md key={option.id}>
-										<Grid item style={{ maxWidth: '12em' }}>
+									<Grid
+										item
+										container
+										md
+										component={Button}
+										onClick={() => handleSelect(option.id)}
+										direction="column"
+										key={option.id}
+										style={{
+											display: 'grid',
+											textTransform: 'none',
+											borderRadius: 0,
+											backgroundColor: option.selected
+												? theme.palette.secondary.main
+												: null,
+										}}
+									>
+										<Grid item style={{ maxWidth: '14em' }}>
 											<Typography
 												variant="h6"
 												textAlign="center"
