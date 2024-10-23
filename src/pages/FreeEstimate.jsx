@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
 
@@ -313,6 +315,14 @@ function FreeEstimate() {
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const [questions, setQuestions] = useState(defaultQuestions);
+	const [dialogOpen, setDialogOpen] = useState(false);
+
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [emailHelper, setEmailHelper] = useState('');
+	const [phone, setPhone] = useState('');
+	const [phoneHelper, setPhoneHelper] = useState('');
+	const [message, setMessage] = useState('');
 
 	const defaultOptions = {
 		loop: true,
@@ -400,6 +410,38 @@ function FreeEstimate() {
 				break;
 			default:
 				setQuestions(newQuestions);
+		}
+	};
+
+	const onChange = (event) => {
+		let valid;
+
+		switch (event.target.id) {
+			case 'email':
+				setEmail(event.target.value);
+				valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+					event.target.value,
+				);
+				if (!valid) {
+					setEmailHelper('Invalid email address');
+				} else {
+					setEmailHelper('');
+				}
+				break;
+
+			case 'phone':
+				setPhone(event.target.value);
+				valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(
+					event.target.value,
+				);
+				if (!valid) {
+					setPhoneHelper('Invalid phone number');
+				} else {
+					setPhoneHelper('');
+				}
+				break;
+			default:
+				break;
 		}
 	};
 
@@ -538,9 +580,98 @@ function FreeEstimate() {
 				</Grid>
 
 				<Grid item>
-					<StyledButton variant="contained">Get Estimate</StyledButton>
+					<StyledButton variant="contained" onClick={() => setDialogOpen(true)}>
+						Get Estimate
+					</StyledButton>
 				</Grid>
 			</Grid>
+
+			<Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+				<Grid container justifyContent="center">
+					<Grid item>
+						<Typography variant="h2" alignItems="center">
+							Estimate
+						</Typography>
+					</Grid>
+				</Grid>
+
+				<DialogContent>
+					<Grid item container direction="column">
+						<Grid
+							item
+							container
+							direction="column"
+							style={{ maxWidth: '20em' }}
+						>
+							<Grid item style={{ marginBottom: '0.5em' }}>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Name"
+									id="name"
+									value={name}
+									onChange={(event) => setName(event.target.value)}
+								/>
+							</Grid>
+
+							<Grid item style={{ marginBottom: '0.5em' }}>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Email"
+									id="email"
+									value={email}
+									onChange={onChange}
+									error={emailHelper.length !== 0}
+									helperText={emailHelper}
+								/>
+							</Grid>
+
+							<Grid item style={{ marginBottom: '0.5em' }}>
+								<TextField
+									fullWidth
+									variant="standard"
+									label="Phone"
+									id="phone"
+									value={phone}
+									onChange={onChange}
+									error={phoneHelper.length !== 0}
+									helperText={phoneHelper}
+								/>
+							</Grid>
+						</Grid>
+
+						<Grid item style={{ maxWidth: '20em' }}>
+							<TextField
+								fullWidth
+								variant="standard"
+								value={message}
+								multiline
+								id="message"
+								rows={10}
+								onChange={(event) => setMessage(event.target.value)}
+								InputProps={{ disableUnderline: true }}
+								sx={{
+									border: '2px solid #0B72B9',
+									marginTop: '5em',
+									borderRadius: 1,
+								}}
+							/>
+						</Grid>
+
+						<Grid item>
+							<Typography variant="body2" paragraph>
+								We can create this digital solution for an estimated
+							</Typography>
+							<Typography variant="body2" paragraph>
+								Fill out your name, number, and email, place your request, and
+								we’ll get back to you with details moving forward and a final
+								price.
+							</Typography>
+						</Grid>
+					</Grid>
+				</DialogContent>
+			</Dialog>
 		</Grid>
 	);
 }
