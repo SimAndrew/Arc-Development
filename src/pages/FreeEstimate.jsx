@@ -53,6 +53,13 @@ const StyledButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
+const SpecialText = styled('span')(({ theme }) => ({
+	fontFamily: 'Raleway',
+	fontWeight: 700,
+	fontSize: '1.5rem',
+	color: theme.palette.secondary.main,
+}));
+
 const defaultQuestions = [
 	{
 		id: 1,
@@ -324,6 +331,8 @@ function FreeEstimate() {
 	const [phoneHelper, setPhoneHelper] = useState('');
 	const [message, setMessage] = useState('');
 
+	const [total, setTotal] = useState(0);
+
 	const defaultOptions = {
 		loop: true,
 		autoplay: true,
@@ -443,6 +452,31 @@ function FreeEstimate() {
 			default:
 				break;
 		}
+	};
+
+	const getTotal = () => {
+		let cost = 0;
+
+		const selections = questions
+			.map((question) => question.options.filter((option) => option.selected))
+			.filter((question) => question.length > 0);
+
+		selections.map((options) => options.map((option) => (cost += option.cost)));
+
+		if (questions.length > 2) {
+			const userCost = questions
+				.filter(
+					(question) => question.title === 'How many users do you expect?',
+				)
+				.map((question) =>
+					question.options.filter((option) => option.selected),
+				)[0][0].cost;
+
+			cost -= userCost;
+			cost *= userCost;
+		}
+
+		setTotal(cost);
 	};
 
 	return (
@@ -580,7 +614,13 @@ function FreeEstimate() {
 				</Grid>
 
 				<Grid item>
-					<StyledButton variant="contained" onClick={() => setDialogOpen(true)}>
+					<StyledButton
+						variant="contained"
+						onClick={() => {
+							setDialogOpen(true);
+							getTotal();
+						}}
+					>
 						Get Estimate
 					</StyledButton>
 				</Grid>
@@ -661,7 +701,8 @@ function FreeEstimate() {
 
 						<Grid item>
 							<Typography variant="body2" paragraph>
-								We can create this digital solution for an estimated
+								We can create this digital solution for an estimated{' '}
+								<SpecialText>${total.toFixed(2)}</SpecialText>
 							</Typography>
 							<Typography variant="body2" paragraph>
 								Fill out your name, number, and email, place your request, and
