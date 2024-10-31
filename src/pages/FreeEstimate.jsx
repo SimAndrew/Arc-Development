@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash';
 import Lottie from 'react-lottie';
-import { Link } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -38,7 +37,6 @@ import globe from '../assets/globe.svg';
 import biometrics from '../assets/biometrics.svg';
 
 import estimateAnimation from '../animations/estimateAnimation/data.json';
-import animationData from '../animations/landinganimation/data.js';
 
 const StyledButton = styled(Button)(({ theme }) => ({
 	...theme.typography.estimate,
@@ -333,6 +331,13 @@ function FreeEstimate() {
 
 	const [total, setTotal] = useState(0);
 
+	const [service, setService] = useState([]);
+	const [platforms, setPlatforms] = useState([]);
+	const [features, setFeatures] = useState([]);
+	const [customFeatures, setCustomFeatures] = useState('');
+	const [category, setCategory] = useState('');
+	const [users, setUsers] = useState('');
+
 	const defaultOptions = {
 		loop: true,
 		autoplay: true,
@@ -410,12 +415,30 @@ function FreeEstimate() {
 		switch (newSelected.title) {
 			case 'Custom Software Development':
 				setQuestions(softwareQuestions);
+				setService(newSelected.title);
+				setPlatforms([]);
+				setFeatures([]);
+				setCustomFeatures('');
+				setCategory('');
+				setUsers('');
 				break;
 			case 'iOS/Android App Development':
 				setQuestions(softwareQuestions);
+				setService(newSelected.title);
+				setPlatforms([]);
+				setFeatures([]);
+				setCustomFeatures('');
+				setCategory('');
+				setUsers('');
 				break;
 			case 'Website Development':
 				setQuestions(websiteQuestions);
+				setService(newSelected.title);
+				setPlatforms([]);
+				setFeatures([]);
+				setCustomFeatures('');
+				setCategory('');
+				setUsers('');
 				break;
 			default:
 				setQuestions(newQuestions);
@@ -470,14 +493,172 @@ function FreeEstimate() {
 				)
 				.map((question) =>
 					question.options.filter((option) => option.selected),
-				)[0][0].cost;
+				)[0][0];
 
-			cost -= userCost;
-			cost *= userCost;
+			setUsers(userCost.title);
+
+			cost -= userCost.cost;
+			cost *= userCost.cost;
 		}
 
 		setTotal(cost);
 	};
+
+	const getPlatforms = () => {
+		let newPlatforms = [];
+
+		if (questions.length > 2) {
+			questions
+				.filter(
+					(question) =>
+						question.title === 'Which platforms do you need supported?',
+				)
+				.map((question) =>
+					question.options.filter((option) => option.selected),
+				)[0]
+				.map((option) => newPlatforms.push(option.title));
+
+			setPlatforms(newPlatforms);
+		}
+	};
+
+	const getFeatures = () => {
+		let newFeatures = [];
+
+		if (questions.length > 2) {
+			questions
+				.filter(
+					(question) =>
+						question.title === 'Which features do you expect to use?',
+				)
+				.map((question) => question.options.filter((option) => option.selected))
+				.map((option) =>
+					option.map((newFeature) => newFeatures.push(newFeature.title)),
+				);
+
+			setFeatures(newFeatures);
+		}
+	};
+
+	const getCustomFeatures = () => {
+		if (questions.length > 2) {
+			const newCustomFeatures = questions
+				.filter(
+					(question) =>
+						question.title ===
+						'What type of custom features do you expect to need?',
+				)
+				.map((question) =>
+					question.options.filter((option) => option.selected),
+				)[0][0].title;
+
+			setCustomFeatures(newCustomFeatures);
+		}
+	};
+
+	const getCategory = () => {
+		if (questions.length === 2) {
+			const newCategory = questions
+				.filter(
+					(question) =>
+						question.title === 'Which type of website are you wanting?',
+				)[0]
+				.options.filter((option) => option.selected)[0].title;
+
+			setCategory(newCategory);
+		}
+	};
+
+	const softwareSelection = (
+		<Grid container direction="column">
+			<Grid item container alignItems="center">
+				<Grid item>
+					<img src={check} alt="checkmark" />
+				</Grid>
+				<Grid item>
+					<Typography variant="body2">
+						You want {service}
+						{platforms.length > 0
+							? ` for ${
+									platforms.indexOf('Web Application') > -1 &&
+									platforms.length === 1
+										? 'a Web Application.'
+										: platforms.indexOf('Web Application') > -1 &&
+											  platforms.length === 2
+											? `a Web Application and an ${platforms[1]}.`
+											: platforms.length === 1
+												? `an ${platforms[0]}`
+												: platforms.length === 2
+													? 'an iOS Application and an Android Application.'
+													: platforms.length === 3
+														? 'a Web Application, an iOS Application, and an Android Application.'
+														: null
+								}`
+							: null}
+					</Typography>
+				</Grid>
+			</Grid>
+
+			<Grid item container alignItems="center">
+				<Grid item>
+					<img src={check} alt="checkmark" />
+				</Grid>
+				<Grid item>
+					<Typography variant="body2">
+						{'With '}
+						{features.length > 0
+							? features.length === 1
+								? `${features[0]}.`
+								: features.length === 2
+									? `${features[0]} and ${features[1]}.`
+									: features
+											.filter((feature, index) => index !== features.length - 1)
+
+											.map((feature, index) => (
+												<span key={index}>{`${feature}, `}</span>
+											))
+							: null}
+						{features.length > 0 &&
+						features.length !== 1 &&
+						features.length !== 2
+							? ` and ${features[features.length - 1]}.`
+							: null}
+					</Typography>
+				</Grid>
+			</Grid>
+
+			<Grid item container alignItems="center">
+				<Grid item>
+					<img src={check} alt="checkmark" />
+				</Grid>
+				<Grid item>
+					<Typography variant="body2">
+						The custom features will be of {customFeatures.toLowerCase()}
+						{`, and project will be used by about ${users} users.`}
+					</Typography>
+				</Grid>
+			</Grid>
+		</Grid>
+	);
+
+	const websiteSelection = (
+		<Grid container direction="column">
+			<Grid item container alignItems="center">
+				<Grid item>
+					<img src={check} alt="checkmark" />
+				</Grid>
+
+				<Grid item>
+					<Typography variant="body2">
+						You want{' '}
+						{category === 'Basic'
+							? 'a basic Website.'
+							: `an ${category} Website.`}
+					</Typography>
+				</Grid>
+			</Grid>
+		</Grid>
+	);
 
 	return (
 		<Grid container direction="row">
@@ -619,6 +800,10 @@ function FreeEstimate() {
 						onClick={() => {
 							setDialogOpen(true);
 							getTotal();
+							getPlatforms();
+							getFeatures();
+							getCustomFeatures();
+							getCategory();
 						}}
 					>
 						Get Estimate
@@ -636,12 +821,13 @@ function FreeEstimate() {
 				</Grid>
 
 				<DialogContent>
-					<Grid item container direction="column">
+					<Grid container>
 						<Grid
 							item
 							container
 							direction="column"
-							style={{ maxWidth: '20em' }}
+							md={7}
+							style={{ maxWidth: '30em' }}
 						>
 							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
@@ -679,36 +865,49 @@ function FreeEstimate() {
 									helperText={phoneHelper}
 								/>
 							</Grid>
+
+							<Grid item style={{ maxWidth: '20em' }}>
+								<TextField
+									fullWidth
+									variant="standard"
+									value={message}
+									multiline
+									id="message"
+									rows={10}
+									onChange={(event) => setMessage(event.target.value)}
+									InputProps={{ disableUnderline: true }}
+									sx={{
+										border: '2px solid #0B72B9',
+										marginTop: '5em',
+										borderRadius: 1,
+									}}
+								/>
+							</Grid>
+
+							<Grid item>
+								<Typography variant="body2" paragraph>
+									We can create this digital solution for an estimated{' '}
+									<SpecialText>${total.toFixed(2)}</SpecialText>
+								</Typography>
+								<Typography variant="body2" paragraph>
+									Fill out your name, number, and email, place your request, and
+									we’ll get back to you with details moving forward and a final
+									price.
+								</Typography>
+							</Grid>
 						</Grid>
 
-						<Grid item style={{ maxWidth: '20em' }}>
-							<TextField
-								fullWidth
-								variant="standard"
-								value={message}
-								multiline
-								id="message"
-								rows={10}
-								onChange={(event) => setMessage(event.target.value)}
-								InputProps={{ disableUnderline: true }}
-								sx={{
-									border: '2px solid #0B72B9',
-									marginTop: '5em',
-									borderRadius: 1,
-								}}
-							/>
-						</Grid>
+						<Grid item container direction="column" md={5}>
+							<Grid item>
+								{questions.length > 2 ? softwareSelection : websiteSelection}
+							</Grid>
 
-						<Grid item>
-							<Typography variant="body2" paragraph>
-								We can create this digital solution for an estimated{' '}
-								<SpecialText>${total.toFixed(2)}</SpecialText>
-							</Typography>
-							<Typography variant="body2" paragraph>
-								Fill out your name, number, and email, place your request, and
-								we’ll get back to you with details moving forward and a final
-								price.
-							</Typography>
+							<Grid item>
+								<StyledButton variant="contained">
+									Place Request
+									<SendIcon style={{ marginLeft: '0.5em' }} />
+								</StyledButton>
+							</Grid>
 						</Grid>
 					</Grid>
 				</DialogContent>
