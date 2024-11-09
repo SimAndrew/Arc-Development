@@ -571,11 +571,17 @@ function FreeEstimate() {
 
 	const softwareSelection = (
 		<Grid container direction="column">
-			<Grid item container alignItems="center">
-				<Grid item>
+			<Grid
+				item
+				container
+				alignItems="center"
+				style={{ marginBottom: '1.25em' }}
+			>
+				<Grid item sm={2}>
 					<img src={check} alt="checkmark" />
 				</Grid>
-				<Grid item>
+
+				<Grid item sm={10}>
 					<Typography variant="body2">
 						You want {service}
 						{platforms.length > 0
@@ -599,11 +605,17 @@ function FreeEstimate() {
 				</Grid>
 			</Grid>
 
-			<Grid item container alignItems="center">
-				<Grid item>
+			<Grid
+				item
+				container
+				alignItems="center"
+				style={{ marginBottom: '1.25em' }}
+			>
+				<Grid item sm={2}>
 					<img src={check} alt="checkmark" />
 				</Grid>
-				<Grid item>
+
+				<Grid item sm={10}>
 					<Typography variant="body2">
 						{'With '}
 						{features.length > 0
@@ -628,10 +640,11 @@ function FreeEstimate() {
 			</Grid>
 
 			<Grid item container alignItems="center">
-				<Grid item>
+				<Grid item sm={2}>
 					<img src={check} alt="checkmark" />
 				</Grid>
-				<Grid item>
+
+				<Grid item sm={10}>
 					<Typography variant="body2">
 						The custom features will be of {customFeatures.toLowerCase()}
 						{`, and project will be used by about ${users} users.`}
@@ -642,13 +655,13 @@ function FreeEstimate() {
 	);
 
 	const websiteSelection = (
-		<Grid container direction="column">
+		<Grid container direction="column" style={{ marginTop: '14em' }}>
 			<Grid item container alignItems="center">
-				<Grid item>
+				<Grid item sm={2}>
 					<img src={check} alt="checkmark" />
 				</Grid>
 
-				<Grid item>
+				<Grid item sm={10}>
 					<Typography variant="body2">
 						You want{' '}
 						{category === 'Basic'
@@ -662,11 +675,29 @@ function FreeEstimate() {
 
 	return (
 		<Grid container direction="row">
-			<Grid item container direction="column" lg>
-				<Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
-					<Typography variant="h2">Estimate</Typography>
+			<Grid
+				item
+				container
+				direction="column"
+				lg
+				alignItems={matchesMD ? 'center' : undefined}
+			>
+				<Grid
+					item
+					style={{ marginTop: '2em', marginLeft: matchesMD ? 0 : '5em' }}
+				>
+					<Typography variant="h2" textAlign={matchesMD ? 'center' : undefined}>
+						Estimate
+					</Typography>
 				</Grid>
-				<Grid item>
+				<Grid
+					item
+					style={{
+						marginLeft: matchesMD ? 0 : '0.5em',
+						maxWidth: '50em',
+						marginTop: '7.5em',
+					}}
+				>
 					<Lottie options={defaultOptions} height="100%" width="100%" />
 				</Grid>
 			</Grid>
@@ -677,20 +708,16 @@ function FreeEstimate() {
 				direction="column"
 				alignItems="center"
 				lg
-				style={{ marginRight: '2em', marginBottom: '25em' }}
+				style={{
+					marginRight: matchesMD ? 0 : '0.5em',
+					marginBottom: '25em',
+				}}
 			>
 				{questions
 					.filter((question) => question.active)
 					.map((question, index) => (
 						<React.Fragment key={index}>
-							<Grid
-								item
-								style={{
-									marginRight: '10em',
-									maxWidth: '50em',
-									marginTop: '2.5em',
-								}}
-							>
+							<Grid item>
 								<Typography
 									variant="h2"
 									textAlign="center"
@@ -699,6 +726,8 @@ function FreeEstimate() {
 										fontSize: '2.25rem',
 										marginTop: '5em',
 										lineHeight: 1.25,
+										marginLeft: matchesSM ? '1em' : 0,
+										marginRight: matchesSM ? '1em' : 0,
 									}}
 								>
 									{question.title}
@@ -728,6 +757,7 @@ function FreeEstimate() {
 											display: 'grid',
 											textTransform: 'none',
 											borderRadius: 0,
+											marginBottom: matchesSM ? '1.5em' : 0,
 											backgroundColor: option.selected
 												? theme.palette.secondary.main
 												: null,
@@ -811,9 +841,16 @@ function FreeEstimate() {
 				</Grid>
 			</Grid>
 
-			<Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+			<Dialog
+				open={dialogOpen}
+				onClose={() => setDialogOpen(false)}
+				fullWidth
+				maxWidth="lg"
+				style={{ zIndex: 1302 }}
+				fullScreen={matchesSM}
+			>
 				<Grid container justifyContent="center">
-					<Grid item>
+					<Grid item style={{ marginTop: '1em', marginBottom: '1em' }}>
 						<Typography variant="h2" alignItems="center">
 							Estimate
 						</Typography>
@@ -821,13 +858,18 @@ function FreeEstimate() {
 				</Grid>
 
 				<DialogContent>
-					<Grid container>
+					<Grid
+						container
+						justifyContent="space-around"
+						direction={matchesSM ? 'column' : 'row'}
+						alignItems={matchesSM ? 'center' : undefined}
+					>
 						<Grid
 							item
 							container
 							direction="column"
 							md={7}
-							style={{ maxWidth: '30em' }}
+							style={{ maxWidth: '20em' }}
 						>
 							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
@@ -878,18 +920,27 @@ function FreeEstimate() {
 									InputProps={{ disableUnderline: true }}
 									sx={{
 										border: '2px solid #0B72B9',
-										marginTop: '5em',
+										marginTop: '2em',
+										marginBottom: '2em',
 										borderRadius: 1,
 									}}
 								/>
 							</Grid>
 
 							<Grid item>
-								<Typography variant="body2" paragraph>
-									We can create this digital solution for an estimated{' '}
+								<Typography
+									variant="body2"
+									paragraph
+									textAlign={matchesSM ? 'center' : undefined}
+								>
+									We can create this digital solution for an estimated
 									<SpecialText>${total.toFixed(2)}</SpecialText>
 								</Typography>
-								<Typography variant="body2" paragraph>
+								<Typography
+									variant="body2"
+									paragraph
+									textAlign={matchesSM ? 'center' : undefined}
+								>
 									Fill out your name, number, and email, place your request, and
 									we’ll get back to you with details moving forward and a final
 									price.
@@ -897,7 +948,14 @@ function FreeEstimate() {
 							</Grid>
 						</Grid>
 
-						<Grid item container direction="column" md={5}>
+						<Grid
+							item
+							container
+							direction="column"
+							alignItems={matchesSM ? 'center' : undefined}
+							md={5}
+							style={{ maxWidth: '30em' }}
+						>
 							<Grid item>
 								{questions.length > 2 ? softwareSelection : websiteSelection}
 							</Grid>
@@ -907,6 +965,25 @@ function FreeEstimate() {
 									Place Request
 									<SendIcon style={{ marginLeft: '0.5em' }} />
 								</StyledButton>
+							</Grid>
+
+							<Grid
+								item
+								sx={{
+									display: {
+										sm: 'none',
+										marginBottom: matchesSM ? '5em' : 0,
+										marginTop: matchesSM ? '1em' : 0,
+									},
+								}}
+							>
+								<Button
+									style={{ fontWeight: 300 }}
+									color="primary"
+									onClick={() => setDialogOpen(false)}
+								>
+									Cancel
+								</Button>
 							</Grid>
 						</Grid>
 					</Grid>

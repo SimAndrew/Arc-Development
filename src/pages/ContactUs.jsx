@@ -214,12 +214,7 @@ function ContactUs() {
 							</Grid>
 						</Grid>
 
-						<Grid
-							item
-							container
-							direction="column"
-							style={{ maxWidth: '20em' }}
-						>
+						<Grid item container direction="column" style={{ width: '20em' }}>
 							<Grid item style={{ marginBottom: '0.5em' }}>
 								<TextField
 									fullWidth
@@ -258,7 +253,7 @@ function ContactUs() {
 							</Grid>
 						</Grid>
 
-						<Grid item style={{ maxWidth: '20em' }}>
+						<Grid item style={{ width: '20em' }}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -284,12 +279,12 @@ function ContactUs() {
 						>
 							<StyledSendButton
 								onClick={() => setOpen(true)}
-								// disabled={
-								// 	name.length === 0 ||
-								// 	message.length === 0 ||
-								// 	email.length === 0 ||
-								// 	phone.length === 0
-								// }
+								disabled={
+									name.length === 0 ||
+									message.length === 0 ||
+									email.length === 0 ||
+									phone.length === 0
+								}
 								variant="contained"
 							>
 								Send Message <SendIcon style={{ marginLeft: '1em' }} />
@@ -301,16 +296,17 @@ function ContactUs() {
 
 			<Dialog
 				open={open}
+				fullScreen={matchesSM}
 				onClose={() => setOpen(false)}
 				PaperProps={{
 					style: {
-						zIndex: 1402,
 						paddingTop: matchesMD ? '1em' : '5em',
 						paddingBottom: matchesMD ? '1em' : '5em',
 						paddingLeft: matchesSM ? 0 : matchesMD ? '4em' : '14em',
 						paddingRight: matchesSM ? 0 : matchesMD ? '4em' : '14em',
 					},
 				}}
+				style={{ zIndex: 1302 }}
 			>
 				<DialogContent>
 					<Grid container direction="column">
@@ -357,7 +353,7 @@ function ContactUs() {
 							/>
 						</Grid>
 
-						<Grid item style={{ maxWidth: '20em' }}>
+						<Grid item style={{ width: matchesSM ? '100%' : '20em' }}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -397,12 +393,12 @@ function ContactUs() {
 							<Grid item>
 								<StyledSendButton
 									onClick={() => setOpen(true)}
-									// disabled={
-									// 	name.length === 0 ||
-									// 	message.length === 0 ||
-									// 	email.length === 0 ||
-									// 	phone.length === 0
-									// }
+									disabled={
+										name.length === 0 ||
+										message.length === 0 ||
+										email.length === 0 ||
+										phone.length === 0
+									}
 									variant="contained"
 								>
 									Send Message <SendIcon style={{ marginLeft: '1em' }} />
